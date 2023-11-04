@@ -1,0 +1,7 @@
+import wollok.game.*
+import tablero.*
+
+program Monito {
+	tablero.configuraciones()
+	game.start()
+}

@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
-Automatic-Module-Name: Gloria
+Automatic-Module-Name: JuegoFinal
 Bundle-ManifestVersion: 2
-Bundle-Name: Gloria
+Bundle-Name: JuegoFinal
 Bundle-Vendor: My Company
 Bundle-Version: 1.0.0.qualifier
-Bundle-SymbolicName: Mario;singleton:=true
+Bundle-SymbolicName: JuegoFinal; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: com.ibm.icu,
  org.eclipse.xtext,

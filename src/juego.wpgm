@@ -1,0 +1,13 @@
+import wollok.game.*
+import nivel.*
+import mario.*
+import objetos.*
+
+program juegoSpace {
+	
+	nivel.configurete()
+    //PARA VER LOS ATRIBUTOS DE LA NAVE CUANDO UBICO EL MOUSE EN ELLA
+    game.showAttributes(mario)  
+    game.start()
+    
+}

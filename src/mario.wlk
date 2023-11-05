@@ -1,22 +1,34 @@
 import wollok.game.*
+import objetos.*
 
 object mario {
-	var property position = game.at(1,1)
+	
+	//var vidas = 5
+	 
+	 var  property vitalidad = 20
+	 
+	 var property position = game.origin()
+	 
+	 method image() = "mario.png"
+	
+     method irA(nuevaPosicion) {
+      return if (self.noTengoVialidad()){
+	        self.viaja(position.distance(nuevaPosicion))
+	        position = nuevaPosicion
+      }
+            else{
+      	        //FALTA PONERLE TIEMPO PARA VER EL MENSAJE ANTES DE QUE CIERRE
+            game.onTick(100,"vidas",{game.say(self,"Te quedaste vidas")})
+     
+            game.onTick(2000,"vidas",{game.stop()})
+           }
+      }
+     
+      method viaja(distancia) {
+	   vitalidad = vitalidad - distancia
+      }
 
-	method image() = "mario.png"
-	
-	method agregarAMario(){
-		game.addVisualCharacter(self)
-	}
-	
-	// vidas
-	// puntos
-	// tocas fantasma
-	// agarrar las frutas
-	// tocar enemigo principal
-	// que reciba un disparo
-	// poder abrir la puerta para el final
-	// algun texto cuando recoja algo
-	// muerte
-	
+      method noTengoVialidad(){
+	   return vitalidad>0
+      }  
 }

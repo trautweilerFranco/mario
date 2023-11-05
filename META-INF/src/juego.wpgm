@@ -1,0 +1,12 @@
+import wollok.game.*
+import nivel.*
+import mario.*
+import objetos.*
+
+program juegoSpace {
+	
+	nivel.configurete()
+    game.showAttributes(mario)  
+    game.start()
+    
+}

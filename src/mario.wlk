@@ -3,32 +3,34 @@ import objetos.*
 
 object mario {
 	
-	//var vidas = 5
+	 var vidas = 5
 	 
-	 var  property vitalidad = 20
+	 var vitalidad = 3000
 	 
-	 var property position = game.origin()
+	 var property position = game.at(1,1)
+	 
+	method move(newPos, direccion) {
+		if (self.staysOnMap(newPos) && self.canMove(direccion)) {
+			self.position(newPos)
+		}
+	}
+
+	method staysOnMap(newPos) = return newPos.x() >= 0 && newPos.x() < 15 && newPos.y() >= 0 && newPos.y() < 15
+	
+		method canMove(direccion) = return !direccion.contains(self.position().toString())
+	 
+	 method vitalidad() = vitalidad
+	 
+	 method colisionoConObjeto(unObjeto){
+	 	if(unObjeto.esEnemigo()){
+	 		vitalidad = 0.max(vitalidad - unObjeto.danio())
+	 		vidas --
+	 	} else {
+	 		vitalidad = vitalidad + unObjeto.vitalidad()
+	 		}
+	 }
 	 
 	 method image() = "mario.png"
 	
-     method irA(nuevaPosicion) {
-      return if (self.noTengoVialidad()){
-	        self.viaja(position.distance(nuevaPosicion))
-	        position = nuevaPosicion
-      }
-            else{
-      	        //FALTA PONERLE TIEMPO PARA VER EL MENSAJE ANTES DE QUE CIERRE
-            game.onTick(100,"vidas",{game.say(self,"Te quedaste vidas")})
-     
-            game.onTick(2000,"vidas",{game.stop()})
-           }
-      }
-     
-      method viaja(distancia) {
-	   vitalidad = vitalidad - distancia
-      }
 
-      method noTengoVialidad(){
-	   return vitalidad>0
-      }  
 }

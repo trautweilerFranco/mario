@@ -5,36 +5,51 @@ class Bomba {
 	
 	var property position = pos.posicionAleatoria()
 	
-	var property vitalidad = 100
+	const property esEnemigo = true
+	
+	const property danio = 100
+	
+	const property vitalidad = 0
+	
+	const property esAtravesable = true
 	
 	method image() = "bomba.png"
 	
-	method colisionoCon(objetoVolador){
-   
-      game.say(objetoVolador," bomba econtrada " + " vitalidad : " + self.vitalidad().toString())
-      game.removeVisual(self)
+	method colisionoCon(personaje){
+		mario.colisionoConObjeto(self)
+   		game.say(personaje,"daño sufrido: " + danio.toString())
+   		game.removeVisual(self)
+   		game.say(personaje,"mi vitalidad bajo a" + mario.vitalidad().toString())
      }
 }
 
 class Fantasma {
+	const property esAtravesable = true
 	
 	var property position = pos.posicionAleatoria()
 	
-	var property vitalidad = 50
+	const property danio = 100
 	
+	const property esEnemigo = true
+	
+	const property vitalidad = 0
+
 	method image() = "fantasma.png"
 	
-	method colisionoCon(objetoVolador){
-     game.say(objetoVolador,"fantasma encontrado " + " alcance : " + self.vitalidad().toString())
-     game.removeVisual(self)
+	method colisionoCon(personaje){
+		mario.colisionoConObjeto(self)
+     	game.say(personaje,"daño sufrido:" + danio.toString())
+     	game.removeVisual(self)
+     	game.say(personaje,"mi vitalidad bajo a" + mario.vitalidad().toString())
      }
 }
           
 class Cubo {
+	const property esAtravesable = false
 	
-	var property position = game.at(12,6)
+	var property position = game.center()
 	
-	var property vitalidad = 100
+	const property esEnemigo = false
 	
 	method image() = "cubo.png"
 	
@@ -45,27 +60,104 @@ class Cubo {
 	   	game.addVisualCharacter(personaje)	
 	   	game.addVisual(browser)
 	   	muros.armarTablero()
-	    personaje.position(game.at(1,1))
-	    personaje.vitalidad(){vitalidad = 0}  
+	    personaje.position(game.at(1,1)) 
 	    game.onTick(100,"trampa",{game.say(browser,"Caiste en una trampa")})         
 	           }
-	           else{
-	           	
-	           }  
+	           else{}  
 	}
 }  
-    
+
+class Hongo {
+	
+	const property esAtravesable = true
+	
+	var property position = pos.posicionAleatoria()
+	
+	const property vitalidad = 50
+	
+	method image() = "hongo.png"
+	
+	method colisionoCon(personaje){
+		game.say(personaje,"que bien un hongo")
+		game.removeVisual(self) 
+     }
+}
+
+class Tubo {
+	
+	const property esAtravesable = false
+	
+	var property position = game.at(6,1)	
+	
+	method image() = "Tubo.png"
+	
+	method colisionoCon(personaje){
+		return if(self.esAtravesable()){
+				personaje.avanzar(position)
+			}
+			else{
+				personaje.noAvanzar()
+			}
+     }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 object browser{
+  	
+  	const property esAtravesable = false
   	
    var property position = game.at(11,11)
   
    method image() = "enemigo.png"
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class Bloque{
 	var property position	
-	var property image = "bloque.png"	
-	var property esAtravesable = false
+	var property image = "bloque.png"
+	
+	const property esAtravesable = false
 }
 
 object muros{
@@ -104,37 +196,10 @@ object muros{
 		game.addVisual(dibujo)
 	}
 	
-	method colisionar(){
+	method colisionoCon(personaje){
+
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

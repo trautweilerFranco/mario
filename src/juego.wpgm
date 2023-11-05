@@ -4,9 +4,6 @@ import mario.*
 import objetos.*
 
 program juegoSpace {
-	
-	nivel.configurete()
-    game.showAttributes(mario)  
+	nivel.inicio() 
     game.start()
-    
 }

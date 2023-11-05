@@ -7,7 +7,7 @@ object mario {
 	 
 	 var vitalidad = 3000
 	 
-	 var property position = game.at(1,1)
+	 var property position = game.at(3,3)
 	 
 	method move(newPos, direccion) {
 		if (self.staysOnMap(newPos) && self.canMove(direccion)) {
@@ -15,9 +15,9 @@ object mario {
 		}
 	}
 
-	method staysOnMap(newPos) = return newPos.x() >= 0 && newPos.x() < 15 && newPos.y() >= 0 && newPos.y() < 15
+	method staysOnMap(newPos) = return newPos.x() >= 0 && newPos.x() < 24 && newPos.y() >= 0 && newPos.y() < 24
 	
-		method canMove(direccion) = return !direccion.contains(self.position().toString())
+	method canMove(direccion) = return !direccion.contains(self.position().toString())
 	 
 	 method vitalidad() = vitalidad
 	 

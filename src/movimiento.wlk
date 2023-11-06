@@ -21,7 +21,7 @@ object moves {
 object collides {
 
 	method config() {
-		game.whenCollideDo(mario, { elemento => elemento.colision()})
+		game.whenCollideDo(mario, { elemento => elemento.colisionoCon(mario)})
 	}
 
 }
@@ -109,10 +109,3 @@ object izquierdaSegundo inherits Movimientos(celdasBloqueadas = izquierzaSeg) {
 	}
 
 }
-
-
-
-
-
-
-

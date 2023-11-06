@@ -1,10 +1,10 @@
 import wollok.game.*
 import mario.*
-import sorpresa.*
+import sopresa.*
 
 class Bomba {
 	
-	var position
+	var property position = pos.posicionAleatoria()
 	
 	const property esEnemigo = true
 	
@@ -12,17 +12,12 @@ class Bomba {
 	
 	const property vitalidad = 0
 	
-	method position(unaPosicion){position = unaPosicion}
-	
-	method aparece() = game.addVisual(self)
-	
 	method image() = "bomba.png"
 	
 	method colisionoCon(personaje){
-		mario.colisionoConObjeto(self)
-   		game.say(personaje,"daño sufrido: " + danio.toString())
-   		game.removeVisual(self)
+		personaje.colisionoConObjeto(self)
    		game.say(personaje,"mi vitalidad bajo a" + mario.vitalidad().toString())
+   		game.removeVisual(self)
      }
 }
 
@@ -39,55 +34,48 @@ class Fantasma {
 	method image() = "fantasma.png"
 	
 	method colisionoCon(personaje){
-		mario.colisionoConObjeto(self)
-     	game.say(personaje,"daño sufrido:" + danio.toString())
+		personaje.colisionoConObjeto(self)
      	game.removeVisual(self)
      	game.say(personaje,"mi vitalidad bajo a" + mario.vitalidad().toString())
      }
 }
-          
-class Cubo {
-	
-	var property position = game.at(12,11) // solo toma la primer celda del personaje, OJO
-	
-	const property esEnemigo = false
-	
-	method image() = "cuboMediano.png"
-	
-	method colisionoCon(personaje){
-	   return if(position == personaje.position()){
-	   		sorpresa.sorpresa(personaje,self)
-	   		game.boardGround("fondo.png")
-	   		game.onTick(100,"trampa",{game.say(browser,"Caiste en una trampa")})         
-	           }
-	           else{}  
-	}
-}  
 
 class Hongo {
 	
 	var property position = pos.posicionAleatoria()
 	
-	const property vitalidad = 50
+	const property vitalidad = 150
+	
+	const property esEnemigo = false
+	
+	const property danio = 0
 	
 	method image() = "hongo.png"
 	
 	method colisionoCon(personaje){
-		game.say(personaje,"que bien un hongo")
+		personaje.colisionoConObjeto(self)
+		game.say(personaje,"perfecto, busquemos mas")
 		game.removeVisual(self) 
      }
 }
 
-class Tubo {
+class Cubo {
 	
 	var property position
 	
-	method image() = "Tubo.png"
+	const property esEnemigo = false
+	
+	method image() = "cubo.png"
 	
 	method colisionoCon(personaje){
-     }
-}
-
+	   return if(position == personaje.position()){
+	   		game.removeVisual(self)
+	   		sorpresa.sorpresa(personaje)
+	   		game.onTick(100,"trampa",{game.say(browser,"Caiste en una trampa")})         
+	           }
+	           else{}  
+	}
+}  
 
 object browser{
   	
@@ -100,7 +88,7 @@ object browser{
 
 object pos {
 	method posicionAleatoria(){
-		return game.at(3.randomUpTo(7),
+		return game.at(1.randomUpTo(24),
 			3.randomUpTo(7) 		
 			)
 		

@@ -2,6 +2,7 @@ import wollok.game.*
 import nivel.*
 import mario.*
 import objetos.*
+import nivel.*
 
 program juegoSpace {
 	nivel.inicio() 

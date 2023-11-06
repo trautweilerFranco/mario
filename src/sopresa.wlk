@@ -3,8 +3,7 @@ import objetos.*
 import movimiento.*
 
 object sorpresa {
-	method sorpresa(personaje,cubo){
-		game.removeVisual(cubo)
+	method sorpresa(personaje){
 	   	game.clear()
 	   	game.addVisual(personaje)
 	   	moves.configSegundaParte()	
@@ -19,8 +18,6 @@ object sorpresa {
 class Bloque{
 	var property position	
 	var property image = "bloque.png"
-	
-	const property esAtravesable = false
 }
 
 object muros{
@@ -59,8 +56,4 @@ object muros{
 		game.addVisual(dibujo)
 	}
 	
-	method colisionoCon(personaje){
-
-	}
 }
-
